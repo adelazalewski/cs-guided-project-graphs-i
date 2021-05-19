@@ -16,8 +16,20 @@ class GraphNode:
         self.neighbors = set()
         self.color = None
 
+#undirected = each of the verts go both ways
+#adjacent in this case = directly connected 
+
 def color_graph(graph, colors):
     # Your code here
+    #go over all verts color each vert basted on whatever color is legal
+    #build legal colors as a set
+    #find all of our neighbors
+    for vertex in graph:
+        used_colors = set([neighbor.color for neighbor in vertex.neighbors]) #set of colors that are used by neighbors
+        for color in colors:
+            if color not in used_colors:
+                vertex.color = color
+                break
 
                 
 g1 = GraphNode('G1')
@@ -39,8 +51,8 @@ g3.neighbors.add(g5)
 g3.neighbors.add(g4)
 
 g4.neighbors.add(g1)
-g4.neighbors.add(g2)
 g4.neighbors.add(g3)
+g4.neighbors.add(g2)
 g4.neighbors.add(g5)
 
 g5.neighbors.add(g2)
@@ -48,8 +60,9 @@ g5.neighbors.add(g3)
 g5.neighbors.add(g4)
 
 graph = [g1, g2, g3, g4, g5]
-
+colors = set(['red', 'blue', 'green', 'orange', 'purple'])
 color_graph(graph, colors)
 
 for node in graph:
     print(node.color)
+
